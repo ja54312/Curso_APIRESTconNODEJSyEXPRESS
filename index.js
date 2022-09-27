@@ -6,6 +6,9 @@ const routerApi = require ('./routes')
 const app =  express()
 //puerto donde quieres lanzar tu app
 const port = 3000;
+
+app.use(express.json())
+
 //agregar una ruta
 app.get('/',(req,res)=>{
   res.send('Hola mi server en express')
