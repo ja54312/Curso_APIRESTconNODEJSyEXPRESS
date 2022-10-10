@@ -2,6 +2,8 @@
 const express = require ('express')
 //importamos la funcion router appi
 const routerApi = require ('./routes')
+//importamos los middlewares
+const {logErrors,errorHandler} = require('./middlewares/error.handler')
 //creamos la app
 const app =  express()
 //puerto donde quieres lanzar tu app
@@ -19,6 +21,9 @@ app.get('/nueva-ruta',(req,res)=>{
 })
 //le pasamos la app a router appi
 routerApi(app);
+//Los middlewares de error van despues de la app de router
+app.use(logErrors)
+app.use(errorHandler)
 
 app.listen(port,()=>{
   console.log(`http://localhost:${port}`)
