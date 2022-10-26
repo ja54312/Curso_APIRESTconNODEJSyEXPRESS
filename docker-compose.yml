@@ -3,10 +3,22 @@ services:
         image: postgres
         restart: always
         ports:
-            - 5432
+            - 5432:5432
         environment:
-            POSTGRES_DB: ${DB_NAME}
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            - POSTGRES_DB = my_store
+            - POSTGRES_USER = jose
+            - POSTGRES_PASSWORD = admin123
         volumes:
             - ./db:/var/lib/postgresql/data
+
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: always
+        environment:
+            - USER SET LOCKED = false
+            - LOGIN_ATTEMPTS = 0
+            - PGADMIN_DEFAULT_USERNNAME = ADMIN
+            - PGADMIN_DEFAULT_EMAIL = admin@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD = root
+        ports:
+          - 5050:80
