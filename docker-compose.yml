@@ -1,24 +1,23 @@
+version: '3.8'
 services:
     postgres:
         image: postgres
         restart: always
         ports:
-            - 5432:5432
+            - "5432:5432"
         environment:
-            - POSTGRES_DB = my_store
-            - POSTGRES_USER = jose
-            - POSTGRES_PASSWORD = admin123
-        volumes:
-            - ./db:/var/lib/postgresql/data
+            - DATABASE_HOST=127.0.0.1
+            - POSTGRES_DB=my_store
+            - POSTGRES_USER=jose
+            - POSTGRES_PASSWORD=admin123
 
     pgadmin:
         image: dpage/pgadmin4
         restart: always
         environment:
-            - USER SET LOCKED = false
-            - LOGIN_ATTEMPTS = 0
-            - PGADMIN_DEFAULT_USERNNAME = ADMIN
-            - PGADMIN_DEFAULT_EMAIL = admin@gmail.com
-            - PGADMIN_DEFAULT_PASSWORD = root
+            - PGADMIN_DEFAULT_EMAIL=admin@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=admin123
         ports:
-          - 5050:80
+          - "80:80"
+        depends_on:
+            - postgres
