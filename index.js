@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 //variable donde ingresamos solo los dominios que permitimos ingresar a nuestra api
-const whitelist = ['http://localhost:8080', 'https://myapp.co','http://127.0.0.1:5500'];
+const whitelist = ['http://localhost:8080', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
