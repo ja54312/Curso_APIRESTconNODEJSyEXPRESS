@@ -1,17 +1,17 @@
 const express = require('express');
 
-const CustomerService = require('../services/customers.service');
+const CustomerService = require('../services/customer.service');
 const validationHandler = require('../middlewares/validator.handler');
 const {
   createCustomerSchema,
   getCustomerSchema,
   updateCustomerSchema,
-} = require('../schemas/customer.schema');
+} = require('../schemas/customers.schema');
 
 const router = express.Router();
 const service = new CustomerService();
 
-router.get('/', async (req, res, next) => {
+router.get('/',  async (req, res, next) => {
   try {
     res.json(await service.find());
   } catch (error) {
@@ -19,8 +19,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post(
-  '/',
+router.post('/',
   validationHandler(createCustomerSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -32,8 +31,7 @@ router.post(
   }
 );
 
-router.patch(
-  '/:id',
+router.patch('/:id',
   validationHandler(getCustomerSchema, 'params'),
   validationHandler(updateCustomerSchema, 'body'),
   async (req, res, next) => {
@@ -47,8 +45,7 @@ router.patch(
   }
 );
 
-router.delete(
-  '/:id',
+router.delete('/:id',
   validationHandler(getCustomerSchema, 'params'),
   async (req, res, next) => {
     try {
